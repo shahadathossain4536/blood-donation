@@ -5,11 +5,10 @@ import {
   useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [signInWithGithub, gitUser, gitLoading, gitError] =
@@ -33,9 +32,27 @@ const Login = () => {
           />
         </figure>
         <div class="card-body">
-          <h2 class="card-title text-5xl">Login</h2>
+          <h2 class="card-title text-5xl">Register</h2>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
+              {/* name */}
+              <div class="w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Name</span>
+                </label>
+                <input
+                  {...register("email", { required: true })}
+                  type="text"
+                  placeholder="Name"
+                  class="input input-bordered w-full max-w-xs"
+                />
+                <label class="label">
+                  <span class="label-text-alt text-red-600">
+                    {errors.email?.type === "required" && "Name is required"}
+                  </span>
+                </label>
+              </div>
+              {/* name */}
               {/* email */}
               <div class="w-full max-w-xs">
                 <label class="label">
@@ -60,23 +77,61 @@ const Login = () => {
                   <span class="label-text">Password</span>
                 </label>
                 <input
-                  {...register("email", { required: true })}
+                  {...register("password", { required: true })}
                   type="password"
                   placeholder="Password"
                   class="input input-bordered w-full max-w-xs"
                 />
                 <label class="label">
                   <span class="label-text-alt text-red-600">
-                    {errors.email?.type === "required" &&
+                    {errors.password?.type === "required" &&
                       "Password is required"}
                   </span>
                 </label>
               </div>
               {/* password */}
+              {/*confirm  password */}
+              <div class="w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Confirm Password</span>
+                </label>
+                <input
+                  {...register("confirmPassword", { required: true })}
+                  type="password"
+                  placeholder="Confirm Password"
+                  class="input input-bordered w-full max-w-xs"
+                />
+                <label class="label">
+                  <span class="label-text-alt text-red-600">
+                    {errors.confirmPassword?.type === "required" &&
+                      "Confirm is required"}
+                  </span>
+                </label>
+              </div>
+              {/*confirm password */}
+              {/*phone */}
+              <div class="w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Phone</span>
+                </label>
+                <input
+                  {...register("phone", { required: true })}
+                  type="text"
+                  placeholder="Phone Number"
+                  class="input input-bordered w-full max-w-xs"
+                />
+                <label class="label">
+                  <span class="label-text-alt text-red-600">
+                    {errors.phone?.type === "required" &&
+                      "Phone Number is required"}
+                  </span>
+                </label>
+              </div>
+              {/*phone */}
 
-              <input />
+              {/* <input /> */}
               {/* <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
-              <input type="number" {...register("age", { min: 18, max: 99 })} /> */}
+            <input type="number" {...register("age", { min: 18, max: 99 })} /> */}
               <input
                 className="btn w-full max-w-xs my-4"
                 value="Login"
@@ -85,9 +140,9 @@ const Login = () => {
             </form>
             <p className="text-center">
               <small>
-                No account ?
-                <Link className="text-green-700 ml-1" to="/register">
-                  Create account
+                already have a account
+                <Link className="text-green-700 ml-1" to="/login">
+                  login
                 </Link>
               </small>
             </p>
@@ -120,5 +175,4 @@ const Login = () => {
   );
 };
 
-export default Login;
-<h2>Login</h2>;
+export default Register;
